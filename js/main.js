@@ -12,42 +12,50 @@
     firstTr.appendChild(firstTh);
     tHeader.appendChild(firstTr);
 
-    var addColumn = function addColumn() {
+    function addColumn() {
         tbody.push([tbody.length+1])
         thead.push(headers[thead.length]);
-        render('head');
+        _renderTable('head');
     }
 
-    var addRow = function addRow() {
+    function addRow() {
         tbody.push([tbody.length+1])
-        render('body');
+        _renderTable('body');
     }
 
-    var render = function render(render){
-        if(render === 'head') {
-            tHeader.innerHTML = '';
-            var tr = document.createElement('tr');
+    function _renderHead(){
+        tHeader.innerHTML = '';
+        var tr = document.createElement('tr');
+        var th = document.createElement('th');
+        tr.appendChild(th);
+        for (var i = 0; i < thead.length; i++) {
             var th = document.createElement('th');
+            th.textContent = thead[i];
             tr.appendChild(th);
-            for (var i = 0; i < thead.length; i++) {
-                var th = document.createElement('th');
-                th.textContent = thead[i];
-                tr.appendChild(th);
-                tHeader.appendChild(tr);
-                console.log(thead[i]);
-            };
+            tHeader.appendChild(tr);
+            console.log(thead[i]);
+        };
+    }
+
+    function _renderBody(){
+        tBody.innerHTML = '';
+        for(var i = 0; i < tbody.length; i++) {
+            var tr = document.createElement('tr');
+            console.log(tbody[i][0]);
+            var td = document.createElement('td');
+            td.textContent = tbody[i][0]
+            tr.appendChild(td);
+            tBody.appendChild(tr);
+        }
+    }
+
+    function _renderTable(render){
+        if(render === 'head') {
+            _renderHead();
         }
 
         if(render === 'body') {
-            tBody.innerHTML = '';
-            for(var i = 0; i < tbody.length; i++) {
-                var tr = document.createElement('tr');
-                console.log(tbody[i][0]);
-                var td = document.createElement('td');
-                td.textContent = tbody[i][0]
-                tr.appendChild(td);
-                tBody.appendChild(tr);
-            }
+            _renderBody();
         }
     }
 
@@ -55,6 +63,7 @@
         column: addColumn,
         row: addRow,
     }
+
 }(window));
 
 document.getElementById('addColumn').addEventListener('click', function(){
