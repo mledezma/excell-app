@@ -1,0 +1,20 @@
+.clearfix {
+  overflow: auto;
+  zoom: 1; }
+
+table {
+  border: 1px solid #000;
+  border-collapse: collapse;
+  margin: 30px auto; }
+  table th {
+    border: 1px solid #000;
+    height: 60px;
+    width: 140px; }
+  table tr {
+    border: 1px solid #000;
+    height: 60px;
+    width: 140px; }
+  table td {
+    border: 1px solid #000; }
+
+/*# sourceMappingURL=styles.css.map */
