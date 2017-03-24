@@ -40,12 +40,14 @@
     }
 
     function _renderBody() {
-        var mainId = 0;
-        var secondId = 0;
+        var mainId = 1;
         tBody.innerHTML = '';
         for(var i = 0; i < tbody.length; i++) {
+            // Variables
+            var secondId = 1;            
             var tr = document.createElement('tr');
             var firstTd = document.createElement('td');
+
             firstTd.textContent = tbody[i][0];
             firstTd.id = 'row' + mainId;
             mainId++;
@@ -57,7 +59,8 @@
             for(var j = 0; j < thead.length; j++) {
                 var td = document.createElement('td');
                 td.textContent = tbody[i][j+1];
-                td.id = secondId;
+                td.id = firstTd.id + '-' + secondId;
+                td.contentEditable = true;
                 secondId++;
                 tr.appendChild(td);
             }     
@@ -81,15 +84,30 @@
         if (tbody.length !== 0) {
             for(var i = 0; i < tbody.length; i++) {
                 for(var j = 0; j < thead.length; j++) {
-                    tbody[i].push('test');
+                    tbody[i].push('');
                 }
             }
+        }
+    }
+
+    // Highlight Row
+    function highlightRow(row) {
+        parentRow = row.parentNode.className;
+        if(parentRow != 'selected') {
+            row.parentNode.className = 'selected';                  
+        }
+        if(parentRow == 'selected') {
+            console.log(parentRow.classList)
+            parentRow.classList.remove('selected');                 
         }
     }
 
     window.app = {
         column: addColumn,
         row: addRow,
+        highlightRow: function(row){
+            highlightRow(row);
+        },
     }
 
 }(window));
@@ -101,3 +119,7 @@ document.getElementById('addColumn').addEventListener('click', function(){
 document.getElementById('addRow').addEventListener('click', function(){
     app.row();
 })
+
+document.getElementById('table').addEventListener('click', function(e) {
+    app.highlightRow(e.target)
+});
