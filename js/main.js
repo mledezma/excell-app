@@ -93,13 +93,19 @@
     // Highlight Row
     function highlightRow(row) {
         parentRow = row.parentNode.className;
+        var tr = document.getElementsByTagName('tr');
+        if(row.parentNode.parentNode.id == 'tHeader') {
+            return false;
+        }
+        for(var i = 0; i < tr.length; i++) {
+            if(tr[i].classList == 'selected') {
+                tr[i].classList.remove("selected");
+            }
+        }
+
         if(parentRow != 'selected') {
             row.parentNode.className = 'selected';                  
-        }
-        if(parentRow == 'selected') {
-            console.log(parentRow.classList)
-            parentRow.classList.remove('selected');                 
-        }
+        }        
     }
 
     window.app = {

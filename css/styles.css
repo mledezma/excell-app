@@ -2,10 +2,16 @@
   overflow: auto;
   zoom: 1; }
 
+.selected {
+  background-color: #255C7F; }
+
 table {
+  background-color: #388ABF;
   border: 1px solid #000;
   border-collapse: collapse;
-  margin: 30px auto; }
+  color: #FFB44B;
+  margin: 30px auto;
+  text-align: center; }
   table th {
     border: 1px solid #000;
     height: 60px;
